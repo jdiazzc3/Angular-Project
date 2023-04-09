@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebaseError } from 'firebase/app';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -10,9 +12,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class RegisterComponent implements OnInit{
   registrarUsuario: FormGroup;
+  
 
   constructor(private fb: FormBuilder, 
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth, private toastr:ToastrService) {
     this.registrarUsuario = this.fb.group({
       name: ['',Validators.required],
       email: ['',Validators.required],
@@ -33,22 +36,48 @@ export class RegisterComponent implements OnInit{
     const photo = this.registrarUsuario.value.photo
   
     if (password !== confirmPassword) {
+      this.toastr.error("Contraseñas no coinciden",'Error');
       // mostrar error, las contraseñas no coinciden
       return;
     }
   
-    this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Actualizar el perfil del usuario en Firebase Auth
-        userCredential.user?.updateProfile({
-          displayName: name,
-          photoURL: photo
-        });
-        // Mostrar mensaje de éxito
-      })
-      .catch((error) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar || password.length < 8) {
+      console.log("error contraseña no valida")
+      this.toastr.success('Hello world!', 'Toastr fun!');
+      // mostrar error, la contraseña no cumple con las políticas requeridas
+      return;
+    }
+
+    this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
+        console.log(user);
+        }).catch((error) => {
+        console.log("error");
+        this.toastr.error(this.firebaseError(error.code),'Error');
+        
         // Mostrar mensaje de error
       });
+  }
+
+  firebaseError( code : string){
+
+    switch(code){
+      case 'auth/invalid-email':
+        return 'El correo electrónico no es válido';
+        break;
+      case 'auth/email-already-in-use':
+        return 'El correo electrónico ya está en uso';
+        break;
+      case 'auth/weak-password':
+        return 'La contraseña debe tener al menos 6 caracteres';
+        break;
+      default:
+          return 'Error desconocido';
+    }
   }
   
 }

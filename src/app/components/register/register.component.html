@@ -9,22 +9,22 @@
         <h2>Sign Up</h2>
         <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
             <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/user.svg"></span>
+                <span class="icon"><img src="../../../assets/img/user.svg" draggable="false"></span>
                 <input type="text" required formControlName="name">
                 <label>Full Name</label>
             </div>
             <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/mail.svg"></span>
+                <span class="icon"><img src="../../../assets/img/mail.svg" draggable="false"></span>
                 <input type="email" required formControlName="email">
                 <label>Email</label>
             </div>
             <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/lock.svg"></span>
+                <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
                 <input type="password" required formControlName="password">
                 <label>Password</label>
             </div>
             <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/lock.svg"></span>
+                <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
                 <input type="password" required formControlName="confirmPassword">
                 <label>Confirm Password</label>
             </div>
@@ -34,9 +34,10 @@
                     <span class="icon"><img src="../../../assets/img/upload.svg"></span>
                     Profile Photo
                   </label>
-                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo">
+                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*">
             </div>
             <button type="submit" class="btn">Sign Up</button>
+            <!-- <p-messages [(value)]="" [enableService]="false" [closable]="false"></p-messages> -->
         </form>
     </div>
     

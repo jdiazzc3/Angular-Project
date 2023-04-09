@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
+import { MessagesModule } from 'primeng/messages';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 //componentes
 import { LoginComponent } from './components/login/login.component';
@@ -30,7 +33,10 @@ import { environment } from './environments/environment';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MessagesModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
    ],
   providers: [],
   bootstrap: [AppComponent]
