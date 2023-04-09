@@ -1,5 +1,5 @@
 <header>
-    <h2 class="logo">RecipeKeeper</h2>
+    <h2 class="logo">Logo</h2>
     <nav class="navigation">
     <button class="btnLogin-popup" routerLink="/login">Sign in</button>
     </nav>
@@ -7,25 +7,25 @@
 <div class="wrapper">
     <div class="form-box login">
         <h2>Sign Up</h2>
-        <form action="a">
+        <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
             <div class="input-box">
                 <span class="icon"><img src="../../../assets/img/user.svg"></span>
-                <input type="text" required>
+                <input type="text" required formControlName="name">
                 <label>Full Name</label>
             </div>
             <div class="input-box">
                 <span class="icon"><img src="../../../assets/img/mail.svg"></span>
-                <input type="email" required>
+                <input type="email" required formControlName="email">
                 <label>Email</label>
             </div>
             <div class="input-box">
                 <span class="icon"><img src="../../../assets/img/lock.svg"></span>
-                <input type="password" required>
+                <input type="password" required formControlName="password">
                 <label>Password</label>
             </div>
             <div class="input-box">
                 <span class="icon"><img src="../../../assets/img/lock.svg"></span>
-                <input type="password" required>
+                <input type="password" required formControlName="confirmPassword">
                 <label>Confirm Password</label>
             </div>
             
@@ -34,7 +34,7 @@
                     <span class="icon"><img src="../../../assets/img/upload.svg"></span>
                     Profile Photo
                   </label>
-                  <input type="file" id="upload-photo" style="display: none;">
+                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo">
             </div>
             <button type="submit" class="btn">Sign Up</button>
         </form>
