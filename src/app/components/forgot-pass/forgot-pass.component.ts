@@ -27,12 +27,12 @@ export class ForgotPassComponent implements OnInit{
   }
 
   recuperar() {
-    const email = this.recuperarUsuario.value.email;
-    this.afAuth.sendPasswordResetEmail(email).then(() => {
+      const email = this.recuperarUsuario.value.email;
+      this.afAuth.sendPasswordResetEmail(email).then(() => {
       this.toastr.success('Email sent successfully!', 'Success');
       this.recuperarUsuario.reset();
       this.router.navigate(['/login']);
-    }).catch(() => {
+    }).catch((error) => {
       this.toastr.error('Invalid email. Please try again.', 'Error');
     })
   }
