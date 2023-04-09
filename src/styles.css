@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&family=Montserrat:wght@200;700&family=Oswald:wght@300;500&family=Poppins:wght@100;200;300;400;500;600;700&family=Quicksand:wght@300;400;600&family=Roboto:wght@100;400;500;700;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(https://cdn.wallpapersafari.com/87/82/846ibG.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
