@@ -59,7 +59,7 @@ header {
 
 .form-box h2 {
     font-size: 2em;
-    /* font-weight: 600; */
+    font-weight: 800;
     color: #778894;
     text-align: center;
 }
@@ -110,8 +110,8 @@ header {
     line-height: 57px;
 }
 .icon img {
-    width: 20px;
-    height: 20px; 
+    width: 18px;
+    height: 18px; 
 }
 
 

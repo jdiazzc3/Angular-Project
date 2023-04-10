@@ -7,7 +7,7 @@
 <div class="wrapper">
     <div class="form-box login">
         <h2>Reset Password</h2>
-        <form [formGroup]="recuperarUsuario">
+        <form (ngSubmit)="recuperar()" [formGroup]="recuperarUsuario">
             <div class="input-box">
                 <span class="icon"><img src="../../../assets/img/mail.svg" alt="user" draggable="false"></span>
                 <input type="email" required formControlName="email">
