@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 import { environment } from './environments/environment';
 
 @NgModule({
-  declarations: [
+    declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
