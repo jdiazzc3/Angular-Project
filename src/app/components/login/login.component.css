@@ -124,7 +124,7 @@ header {
     border-radius: 50%;
     border: 2px solid #778894;
     margin: 0 auto;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 .input-icons a img {
     height: 20px;
@@ -135,6 +135,7 @@ header {
 
 .input-icons a:hover {
     /* border-color: #7788948e; */
+    transform: scale(1.2);
 }
 
 .input-icons a:hover img {
