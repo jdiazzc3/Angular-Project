@@ -3,6 +3,12 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { signInWithPopup } from "@angular/fire/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+import { Auth } from "@angular/fire/auth";
+import { FacebookAuthProvider } from "firebase/auth";
+import { GithubAuthProvider } from 'firebase/auth';
+
 
 
 @Component({
@@ -12,12 +18,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit{
   loginUsuario: FormGroup;
+  private googleProvider = new GoogleAuthProvider();
+  private facebookProvider = new FacebookAuthProvider();
+  private githubProvider = new GithubAuthProvider();
 
+ 
+ 
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
-    private router: Router) {
+    private router: Router,
+    private firebaseAuth: AngularFireAuth,) {
         this.loginUsuario = this.fb.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
@@ -37,4 +49,44 @@ export class LoginComponent implements OnInit{
         this.toastr.error('Invalid email or password. Please try again.', 'Error');
       })
     }
+
+   
+  loginGoogle() {
+
+   this.afAuth.signInWithPopup(this.googleProvider).then((result) => {
+      this.toastr.success('User logged in successfully!', 'Success');
+      this.loginUsuario.reset();
+      this.router.navigate(['/dashboard']);
+    }).catch(()=>{
+      this.toastr.error('Invalid email or password. Please try again.', 'Error');
+    })
+  }
+   
+  loginWithFacebook() {
+    this.afAuth.signInWithPopup(this.facebookProvider).then((result) => {
+      this.toastr.success('User logged in successfully!', 'Success');
+      this.loginUsuario.reset();
+      this.router.navigate(['/dashboard']);
+    }).catch(()=>{
+      this.toastr.error('Invalid email or password. Please try again.', 'Error');
+    })
+    
+  }
+  loginWithGithub() {
+    this.afAuth.signInWithPopup(this.githubProvider).then((result) => {
+      this.toastr.success('User logged in successfully!', 'Success');
+      this.loginUsuario.reset();
+      this.router.navigate(['/dashboard']);
+    }).catch(()=>{
+      this.toastr.error('Invalid email or password. Please try again.', 'Error');
+    })
+    
+  }
+  
+  
+   
+ 
+
 }
+
+

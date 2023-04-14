@@ -28,18 +28,19 @@
                 <p>Don't have an account? <a routerLink="/register" class="register-link" draggable="false">Register</a></p>
             </div>
             <div class="input-icons">
-                <a>
+                <a (click)="loginGoogle()">
                     <img src="../../../assets/img/google.svg" alt="" draggable="false">
+                  
                   </a>
                   
-                  <a>
+                  <a (click)="loginWithFacebook()">
                     <img src="../../../assets/img/facebook.svg" alt="" draggable="false">
                   </a>
                   
                   <a>
                     <img src="../../../assets/img/twitter.svg" alt="" draggable="false">
                   </a>
-                  <a>
+                  <a (click)="loginWithGithub()">
                     <img src="../../../assets/img/github.svg" alt="" draggable="false">
                   </a>
             </div>

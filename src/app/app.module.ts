@@ -9,6 +9,8 @@ import { MessagesModule } from 'primeng/messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+
+
 //componentes
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -37,6 +39,7 @@ import { environment } from './environments/environment';
     MessagesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    AngularFireModule,
    ],
   providers: [],
   bootstrap: [AppComponent]

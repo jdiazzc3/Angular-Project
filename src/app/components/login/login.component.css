@@ -125,6 +125,7 @@ header {
     border: 2px solid #778894;
     margin: 0 auto;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 .input-icons a img {
     height: 20px;
