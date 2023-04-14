@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { MessagesModule } from 'primeng/messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 //componentes
 import { LoginComponent } from './components/login/login.component';
@@ -37,6 +38,7 @@ import { environment } from './environments/environment';
     MessagesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    provideAuth(()=>getAuth())
    ],
   providers: [],
   bootstrap: [AppComponent]

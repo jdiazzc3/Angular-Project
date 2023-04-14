@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { signInWithPopup, GoogleAuthProvider, Auth } from '@angular/fire/auth'
 
 
 @Component({
@@ -12,12 +13,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit{
   loginUsuario: FormGroup;
+  private googleProvider = new GoogleAuthProvider();
 
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
-    private router: Router) {
+    private router: Router
+    ) {
         this.loginUsuario = this.fb.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
@@ -36,5 +39,13 @@ export class LoginComponent implements OnInit{
       }).catch(()=>{
         this.toastr.error('Invalid email or password. Please try again.', 'Error');
       })
+    }
+    loginWithGoogle() {
+      this.afAuth.signInWithPopup(this.googleProvider).then((result) => {
+        this.toastr.success('User logged in successfully!', 'Success');
+        this.router.navigate(['/dashboard']);
+      }).catch(() => {
+        this.toastr.error('Error while logging in with Google. Please try again.', 'Error');
+      });
     }
 }
