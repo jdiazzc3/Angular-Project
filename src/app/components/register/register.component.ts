@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from 'firebase/app';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
+ //import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -17,8 +17,7 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router,
-    ) {
+    private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router,) {
     this.registrarUsuario = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -69,22 +68,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  //guardar datos en la base de datos
-  // guardarDatos() {
-  //   const email = this.registrarUsuario.value.email
-  //   const password = this.registrarUsuario.value.password
-  //   const name = this.registrarUsuario.value.name
-  //   const confirmPassword = this.registrarUsuario.value.confirmPassword
-  //   const photo = this.registrarUsuario.value.photo
 
-  //   this.firestore.collection('users').add({
-  //     name: name,
-  //     email: email,
-  //     password: password,
-  //     confirmPassword: confirmPassword,
-  //     photo: photo
-  //   });
-  // }
 
 
 

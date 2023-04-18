@@ -8,7 +8,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { Auth } from "@angular/fire/auth";
 import { FacebookAuthProvider } from "firebase/auth";
 import { GithubAuthProvider } from 'firebase/auth';
-
+import { TwitterAuthProvider } from 'firebase/auth';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
   private googleProvider = new GoogleAuthProvider();
   private facebookProvider = new FacebookAuthProvider();
   private githubProvider = new GithubAuthProvider();
+  private twitterProvider = new TwitterAuthProvider();
 
  
  
@@ -82,11 +83,18 @@ export class LoginComponent implements OnInit{
     })
     
   }
-  
-  
-   
- 
 
-}
+  loginWithTwitter() {
+    
+    this.afAuth.signInWithPopup(this.twitterProvider).then((result) => {
+      this.toastr.success('User logged in successfully!', 'Success');
+      this.loginUsuario.reset();
+      this.router.navigate(['/dashboard']);
+    }).catch(()=>{
+      this.toastr.error('Invalid email or password. Please try again.', 'Error');
+    })
+    
+   }
 
 
+ }
