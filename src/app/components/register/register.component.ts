@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from 'firebase/app';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+ //import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router) {
+    private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router,) {
     this.registrarUsuario = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -66,6 +67,16 @@ export class RegisterComponent implements OnInit {
       // Mostrar mensaje de error
     });
   }
+
+
+
+
+
+
+
+
+
+
 
   firebaseError(code: string) {
 

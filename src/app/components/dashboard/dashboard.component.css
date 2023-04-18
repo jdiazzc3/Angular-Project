@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root{
     /* ===== Colors ===== */
     --primary-color: #0E4BF1;
@@ -354,6 +355,22 @@ nav.close ~ .dashboard .top{
     color: var(--text-color);
 }
 
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #778894;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 500;
+    /* margin-top: px; */
+    transition: 0.3s;
+    
+}
+
 @media (max-width: 1000px) {
     nav{
         width: 73px;
@@ -449,3 +466,5 @@ nav.close ~ .dashboard .top{
         width: 100%;
     }
 }
+
+
