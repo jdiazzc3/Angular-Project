@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,9 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements AfterViewInit {
+
   constructor(
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
   ) {}
 
   singOut() {
@@ -17,7 +19,8 @@ export class DashboardComponent {
     this.router.navigate(['/login']);
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.renderer.setStyle(document.body, 'background-image', 'none');
     const body = document.querySelector("body");
     const modeToggle = body ? body.querySelector(".mode-toggle") : null;
     const sidebar = body ? body.querySelector("nav") : null;
@@ -50,6 +53,5 @@ export class DashboardComponent {
             localStorage.setItem("status", "open");
         }
     });
-
   }
 }

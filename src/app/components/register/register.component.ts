@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from 'firebase/app';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
- //import { AngularFirestore } from '@angular/fire/compat/firestore';
+//  import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
 
     if (password !== confirmPassword) {
       this.toastr.error("Passwords do not match. Please try again", 'Error');
-      // mostrar error, las contraseñas no coinciden
+      // muestra error, las contraseñas no coinciden
       return;
     }
 
@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
     if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar || password.length < 8) {
       console.log("error contraseña no valida")
       this.toastr.error('Invalid password. Please try again.', 'Error');
-      // mostrar error, la contraseña no cumple con las políticas requeridas
       return;
     }
 
@@ -63,20 +62,9 @@ export class RegisterComponent implements OnInit {
     }).catch((error) => {
       console.log("error");
       this.toastr.error(this.firebaseError(error.code), 'Error');
-
-      // Mostrar mensaje de error
+      //muestra error, no es pudo iniciar sesión
     });
   }
-
-
-
-
-
-
-
-
-
-
 
   firebaseError(code: string) {
 

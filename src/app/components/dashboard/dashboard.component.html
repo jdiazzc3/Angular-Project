@@ -1,4 +1,3 @@
-
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <nav>
         <div class="logo-name">
@@ -11,24 +10,24 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#">
+                <li><a>
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dahsboard</span>
                 </a></li>
-                <li><a href="#">
+                <li><a>
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">My Recipes</span>
                 </a></li>
             </ul>
             
             <ul class="logout-mode">
-                <li><a href="#">
+                <li><a>
                     <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
+                    <span class="link-name" (click)="singOut()">Logout</span>
                 </a></li>
 
                 <li class="mode">
-                    <a href="#">
+                    <a>
                         <i class="uil uil-moon"></i>
                     <span class="link-name">Dark Mode</span>
                 </a>
@@ -135,7 +134,5 @@
             </div>
         </div>
     </section>
-<p>dashboard works!</p>
-<div>
-<button (click)="singOut()" class="btn">Logout</button>
-</div>
+
+
