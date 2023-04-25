@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from 'firebase/app';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-//  import { AngularFirestore } from '@angular/fire/compat/firestore';
+ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -17,13 +17,16 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router,) {
+    private afAuth: AngularFireAuth, 
+    private toastr: ToastrService, 
+    private router: Router,
+    private firestore:AngularFirestore) {
     this.registrarUsuario = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      photo: ['']
+      photo: ['',Validators.required]
     })
   }
 
@@ -56,9 +59,21 @@ export class RegisterComponent implements OnInit {
 
     this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
       console.log(user);
-      this.toastr.success('User registered successfully!', 'Succes');
-      this.registrarUsuario.reset();
-      this.router.navigate(['/login']);
+
+      // Guardar datos del usuario en Firestore
+      this.firestore.collection('users').add({
+        name: name,
+        email: email,
+        photo: photo,
+        uid: user.user?.uid
+      }).then(() => {
+        this.toastr.success('User registered successfully!', 'Succes');
+        this.registrarUsuario.reset();
+        this.router.navigate(['/login']);
+      }).catch((error) => {
+        console.log(error);
+        this.toastr.error('Error saving user data.', 'Error');
+      });
     }).catch((error) => {
       console.log("error");
       this.toastr.error(this.firebaseError(error.code), 'Error');
