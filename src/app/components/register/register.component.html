@@ -32,9 +32,9 @@
             <div class="remember-forgot">
                 <label for="upload-photo" class="btn-upload">
                     <span class="icon"><img src="../../../assets/img/upload.svg"></span>
-                    Profile Photo
+                    <span id="file-name">Profile Photo</span>
                   </label>
-                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*">
+                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*" (change)="onFileSelected($event)">
             </div>
             <button type="submit" class="btn">Sign Up</button>
         </form>
