@@ -1,46 +1,48 @@
-<header>
-    <h2 class="logo">Logo</h2>
-    <nav class="navigation">
-    <button class="btnLogin-popup" routerLink="/login">Sign in</button>
-    </nav>
-</header>
-<div class="wrapper">
-    <div class="form-box login">
-        <h2>Sign Up</h2>
-        <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/user.svg" draggable="false"></span>
-                <input type="text" required formControlName="name">
-                <label>Full Name</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/mail.svg" draggable="false"></span>
-                <input type="email" required formControlName="email">
-                <label>Email</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
-                <input type="password" required formControlName="password">
-                <label>Password</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
-                <input type="password" required formControlName="confirmPassword">
-                <label>Confirm Password</label>
-            </div>
-            
-            <div class="remember-forgot">
-                <label for="upload-photo" class="btn-upload">
-                    <span class="icon"><img src="../../../assets/img/upload.svg"></span>
-                    <span id="file-name">Profile Photo</span>
-                  </label>
-                  <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*" (change)="onFileSelected($event)">
-            </div>
-            <button type="submit" class="btn">Sign Up</button>
-        </form>
+<body>
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+        <button class="btnLogin-popup" routerLink="/login">Sign in</button>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Sign Up</h2>
+            <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/user.svg" draggable="false"></span>
+                    <input type="text" required formControlName="name">
+                    <label>Full Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/mail.svg" draggable="false"></span>
+                    <input type="email" required formControlName="email">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
+                    <input type="password" required formControlName="password">
+                    <label>Password</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
+                    <input type="password" required formControlName="confirmPassword">
+                    <label>Confirm Password</label>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label for="upload-photo" class="btn-upload">
+                        <span class="icon"><img src="../../../assets/img/upload.svg"></span>
+                        <span id="file-name">Profile Photo</span>
+                      </label>
+                      <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*" (change)="onFileSelected($event)">
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+    
+    
+        
+        
     </div>
-
-
-    
-    
-</div>
+</body>

@@ -21,6 +21,9 @@ import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.compon
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppComponent } from './app.component';
 import { environment } from './environments/environment';
+import { BodyComponent } from './body/body.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +33,10 @@ import { environment } from './environments/environment';
     DashboardComponent,
     VerifyComponent,
     ForgotPassComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    BodyComponent,
+    SidenavComponent,
+    RecipesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,48 +1,50 @@
-<header>
-    <h2 class="logo">Logo</h2>
-    <nav class="navigation">
-    <!-- <button class="btnLogin-popup">Login</button> -->
-    </nav>
-</header>
-<div class="wrapper">
-    <div class="form-box login">
-        <h2>Sign In</h2>
-        <form (ngSubmit)="login()" [formGroup]="loginUsuario">
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/mail.svg" alt="email" draggable="false"></span>
-                <input type="email" required formControlName="email">
-                <label>Email</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
-                <input type="password" required formControlName="password">
-                <label>Password</label>
-            </div>
-            <div class="remember-forgot">
-                <label><input type="checkbox">
-                   Remember me</label>
-                <a routerLink="/forgot-password" draggable="false">Forgot password?</a>
-            </div>
-            <button type="submit" class="btn">Sign In</button>
-            <div class="login-register">
-                <p>Don't have an account? <a routerLink="/register" class="register-link" draggable="false">Register</a></p>
-            </div>
-            <div class="input-icons">
-                <a (click)="loginGoogle()">
-                    <img src="../../../assets/img/google.svg" alt="" draggable="false">
-                </a>
-                  
-                <a (click)="loginWithFacebook()">
-                    <img src="../../../assets/img/facebook.svg" alt="" draggable="false">
-                </a>
-
-                <a (click)="loginWithTwitter()">
-                    <img src="../../../assets/img/twitter.svg" alt="" draggable="false">
-                </a>
-                <a (click)="loginWithGithub()">
-                    <img src="../../../assets/img/github.svg" alt="" draggable="false">
-                </a>
-            </div>
-        </form>
+<body>
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+        <!-- <button class="btnLogin-popup">Login</button> -->
+        </nav>
+    </header>
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Sign In</h2>
+            <form (ngSubmit)="login()" [formGroup]="loginUsuario">
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/mail.svg" alt="email" draggable="false"></span>
+                    <input type="email" required formControlName="email">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><img src="../../../assets/img/lock.svg" draggable="false"></span>
+                    <input type="password" required formControlName="password">
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">
+                       Remember me</label>
+                    <a routerLink="/forgot-password" draggable="false">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a routerLink="/register" class="register-link" draggable="false">Register</a></p>
+                </div>
+                <div class="input-icons">
+                    <a (click)="loginGoogle()">
+                        <img src="../../../assets/img/google.svg" alt="" draggable="false">
+                    </a>
+                      
+                    <a (click)="loginWithFacebook()">
+                        <img src="../../../assets/img/facebook.svg" alt="" draggable="false">
+                    </a>
+    
+                    <a (click)="loginWithTwitter()">
+                        <img src="../../../assets/img/twitter.svg" alt="" draggable="false">
+                    </a>
+                    <a (click)="loginWithGithub()">
+                        <img src="../../../assets/img/github.svg" alt="" draggable="false">
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</body>

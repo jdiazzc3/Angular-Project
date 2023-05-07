@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumber = /\d/.test(password);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
+    //verifica que la contraseña cumple con las políticas
     if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar || password.length < 8) {
       console.log("error contraseña no valida")
       this.toastr.error('Invalid password. Please try again.', 'Error');
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       let fileName = file.name;
-      const maxLength = 13; // Longitud máxima permitida para el nombre del archivo
+      const maxLength = 9; // Longitud máxima permitida para el nombre del archivo
       if (fileName.length > maxLength) {
         // Si el nombre es demasiado largo, truncarlo y agregar puntos suspensivos
         fileName = fileName.substr(0, maxLength) + '...';
@@ -101,17 +101,19 @@ export class RegisterComponent implements OnInit {
 
     switch (code) {
       case 'auth/invalid-email':
-        return 'El correo electrónico no es válido';
+        return 'Please enter a valid email address';
         break;
       case 'auth/email-already-in-use':
-        return 'El correo electrónico ya está en uso';
+        return 'The email address is already in use.';
         break;
       case 'auth/weak-password':
-        return 'La contraseña debe tener al menos 6 caracteres';
+        return 'The password must have at least 6 characters';
         break;
       default:
-        return 'Error desconocido';
+        return 'Unknown error';
     }
   }
 
 }
+
+
