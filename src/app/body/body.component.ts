@@ -10,12 +10,16 @@ export class BodyComponent {
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
-  // getBodyClass() : string {
+  getBodyClass() : string {
 
-  //   let styleClass = '';
+    let styleClass = '';
 
-  //   if (this.collapsed && this.screenWidth > 768) {
-
-  //   return "body";
-  // }
+    if (this.collapsed && this.screenWidth > 768) {
+      styleClass = 'sidebar-collapse';
+    }
+    else if(this.collapsed && this.screenWidth <= 768  && this.screenWidth > 0) {
+      styleClass = 'body-md-screen';
+    }
+    return styleClass;
+  }
 }

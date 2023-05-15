@@ -25,6 +25,7 @@ import { BodyComponent } from './body/body.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { AuthGuard } from './auth.guard';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { AuthGuard } from './auth.guard';
     BodyComponent,
     SidenavComponent,
     RecipesComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
