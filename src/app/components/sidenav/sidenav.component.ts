@@ -14,6 +14,12 @@ interface SideNavToggle {
 })
 export class SidenavComponent {
 
+  loggedIn: boolean;
+
+  constructor() {
+    this.loggedIn = localStorage.getItem('loggedIn') === 'true';
+  }
+
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter(); 
   collapsed = false;
   screenWidth = 0;

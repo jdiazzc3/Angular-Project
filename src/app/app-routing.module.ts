@@ -5,7 +5,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AuthGuard } from './auth.guard';
+
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full' },
@@ -13,7 +15,7 @@ const routes: Routes = [
   { path:"register", component:RegisterComponent },
   { path:"verify", component:VerifyComponent },
   { path:"forgot-password", component:ForgotPassComponent },
-  { path:"dashboard", component:SidenavComponent },
+  { path:"dashboard", component:SidenavComponent, canActivate: [AuthGuard] },
   { path:"*/", redirectTo:'login', pathMatch:"full" }
 ];
 

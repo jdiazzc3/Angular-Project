@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,6 +7,10 @@ import { signInWithPopup, GoogleAuthProvider, Auth } from '@angular/fire/auth'
 import { FacebookAuthProvider } from "firebase/auth";
 import { GithubAuthProvider } from 'firebase/auth';
 import { TwitterAuthProvider } from 'firebase/auth';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import firebase from 'firebase/compat/app';
+import { AuthGuard } from 'src/app/auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +23,15 @@ export class LoginComponent implements OnInit{
   private facebookProvider = new FacebookAuthProvider();
   private githubProvider = new GithubAuthProvider();
   private twitterProvider = new TwitterAuthProvider();
+  userState: any;
+
 
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
     private router: Router,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
   ) {
     this.loginUsuario = this.fb.group({
       email: ['', Validators.required],
@@ -33,8 +39,11 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {}
 
+  ngOnInit(): void {
+    localStorage.setItem('loggedIn', 'false');
+  }
+ 
   login() {
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
@@ -42,6 +51,7 @@ export class LoginComponent implements OnInit{
     this.afAuth.signInWithEmailAndPassword(email, password).then((user) => {
       this.toastr.success('User logged in successfully!', 'Success');
       this.loginUsuario.reset();
+      localStorage.setItem('loggedIn', 'true');
       this.router.navigate(['/dashboard']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
@@ -52,6 +62,7 @@ export class LoginComponent implements OnInit{
     this.afAuth.signInWithPopup(this.googleProvider).then((result) => {
       this.toastr.success('User logged in successfully!', 'Success');
       this.loginUsuario.reset();
+      localStorage.setItem('loggedIn', 'true');
       this.router.navigate(['/dashboard']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
@@ -86,5 +97,11 @@ export class LoginComponent implements OnInit{
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
+  }
+
+  logout() {
+    this.afAuth.signOut();
+    localStorage.setItem('loggedIn', 'false');
+    this.router.navigate(['/login']);
   }
 }

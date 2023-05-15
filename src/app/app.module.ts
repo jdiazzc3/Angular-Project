@@ -22,8 +22,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppComponent } from './app.component';
 import { environment } from './environments/environment';
 import { BodyComponent } from './body/body.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,7 @@ import { RecipesComponent } from './recipes/recipes.component';
     SpinnerComponent,
     BodyComponent,
     SidenavComponent,
-    RecipesComponent
+    RecipesComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,7 @@ import { RecipesComponent } from './recipes/recipes.component';
     ToastrModule.forRoot(),
     provideAuth(()=>getAuth()),
    ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
