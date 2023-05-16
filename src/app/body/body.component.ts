@@ -15,10 +15,11 @@ export class BodyComponent {
     let styleClass = '';
 
     if (this.collapsed && this.screenWidth > 768) {
-      styleClass = 'sidebar-collapse';
-    }
-    else if(this.collapsed && this.screenWidth <= 768  && this.screenWidth > 0) {
+      styleClass = 'body-trimmed';
+      console.log("body-trimmed");
+    }else if(this.collapsed && this.screenWidth <= 768  && this.screenWidth > 0) {
       styleClass = 'body-md-screen';
+      console.log("body-md-screen");
     }
     return styleClass;
   }

@@ -5,12 +5,12 @@ export const navbarData = [
         label: 'Dashboard'
     },
     {
-        routeLink: 'Recipes',
+        routeLink: 'recipes',
         icon: 'fa-solid fa-plate-wheat',
         label: 'Recipes'
     },
     {
-        routeLink: 'logOut',
+        routeLink: 'login',
         icon: 'fa-solid fa-sign-out',
         label: 'Log Out'
     }

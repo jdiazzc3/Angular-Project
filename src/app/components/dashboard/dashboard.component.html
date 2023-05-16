@@ -1,0 +1,9 @@
+<h1>Dashboard</h1>
+<ul>
+    <li *ngFor="let user of users$ | async">
+      <div>{{ user.name }}</div>
+      <div>{{ user.email }}</div>
+      <!-- <div>{{ user.uid }}</div> -->
+      <div>{{ user.registrationDate | date:'medium' }}</div>
+    </li>
+</ul>

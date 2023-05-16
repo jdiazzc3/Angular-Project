@@ -25,7 +25,7 @@
     text-align: center;
     width: 3rem;
     min-width: 3rem;
-    border-radius: 0.313rem;
+    border-radius: 50%;
     padding: 0.313rem;
     font-size: 24px;
     font-weight: 900;
@@ -100,4 +100,12 @@
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link:hover {
     color: #263238;
     background: #fff;
+}
+
+.active {
+    background-color: #fff;
+}
+
+.active .sidenav-link-icon, .active .sidenav-link-text {
+    color: #263238;
 }

@@ -1,0 +1,16 @@
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  li div {
+    flex: 1;
+    margin-right: 10px;
+  }

@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
 import { AuthGuard } from 'src/app/auth.guard';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router,
     private firebaseAuth: AngularFireAuth,
+    private firestore: AngularFirestore
   ) {
     this.loginUsuario = this.fb.group({
       email: ['', Validators.required],
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit{
       this.toastr.success('User logged in successfully!', 'Success');
       this.loginUsuario.reset();
       localStorage.setItem('loggedIn', 'true');
-      this.router.navigate(['/dashboard']);
+      this.saveUserInfo('Email', user.user);
+      this.router.navigate(['/home']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
@@ -61,9 +65,11 @@ export class LoginComponent implements OnInit{
   loginGoogle() {
     this.afAuth.signInWithPopup(this.googleProvider).then((result) => {
       this.toastr.success('User logged in successfully!', 'Success');
+      const user = result.user;
+      this.saveUserInfo('Google', user);
       this.loginUsuario.reset();
       localStorage.setItem('loggedIn', 'true');
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
@@ -72,8 +78,10 @@ export class LoginComponent implements OnInit{
   loginWithFacebook() {
     this.afAuth.signInWithPopup(this.facebookProvider).then((result) => {
       this.toastr.success('User logged in successfully!', 'Success');
+      const user = result.user;
+      this.saveUserInfo('Facebook', user);
       this.loginUsuario.reset();
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
@@ -82,8 +90,10 @@ export class LoginComponent implements OnInit{
   loginWithGithub() {
     this.afAuth.signInWithPopup(this.githubProvider).then((result) => {
       this.toastr.success('User logged in successfully!', 'Success');
+      const user = result.user;
+      this.saveUserInfo('GitHub', user);
       this.loginUsuario.reset();
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
@@ -92,8 +102,10 @@ export class LoginComponent implements OnInit{
   loginWithTwitter() {
     this.afAuth.signInWithPopup(this.twitterProvider).then((result) => {
       this.toastr.success('User logged in successfully!', 'Success');
+      const user = result.user;
+      this.saveUserInfo('Twitter', user);
       this.loginUsuario.reset();
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }).catch(()=>{
       this.toastr.error('Invalid email or password. Please try again.', 'Error');
     });
@@ -103,5 +115,50 @@ export class LoginComponent implements OnInit{
     this.afAuth.signOut();
     localStorage.setItem('loggedIn', 'false');
     this.router.navigate(['/login']);
+  }
+
+  saveUserInfo(provider: string, user: any) {
+    const userRef = this.firestore.collection('users').doc(user.uid);
+  
+    userRef.get().toPromise().then((docSnapshot) => {
+      if (docSnapshot && docSnapshot.exists) {
+        console.log('User already exists in Firestore');
+      } else {
+        const userData = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL
+        };
+  
+        // Verificar si el proveedor es "Email"
+        if (provider === 'Email') {
+          userData.email = this.loginUsuario.value.email; // Obtener el correo electrónico del formulario de inicio de sesión
+        }
+  
+        userRef.set(userData)
+          .then(() => {
+            console.log('User info saved successfully');
+  
+            // Guardar la información del usuario en el localStorage
+            localStorage.setItem('userInfo', JSON.stringify(userData));
+          })
+          .catch((error) => {
+            console.error('Error saving user info:', error);
+          });
+      }
+    }).catch((error) => {
+      console.error('Error checking user existence:', error);
+    });
+  }
+    
+  
+  getUserInfoFromLocalStorage() {
+    const userInfoString = localStorage.getItem('userInfo');
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+      return userInfo;
+    } else {
+      return null;
+    }
   }
 }

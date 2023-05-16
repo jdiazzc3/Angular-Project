@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
         name: name,
         email: email,
         photo: photo,
-        uid: user.user?.uid
+        // uid: user.user?.uid
       }).then(() => {
         this.toastr.success('User registered successfully!', 'Succes');
         this.registrarUsuario.reset();
