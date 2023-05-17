@@ -1,9 +1,22 @@
-<h1>Dashboard</h1>
-<ul>
-    <li *ngFor="let user of users$ | async">
-      <div>{{ user.name }}</div>
-      <div>{{ user.email }}</div>
-      <!-- <div>{{ user.uid }}</div> -->
-      <div>{{ user.registrationDate | date:'medium' }}</div>
-    </li>
-</ul>
+<div class="container">
+  <div class="input-container">
+    <input type="text" id="search" placeholder="Buscar">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Fecha de Registro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users$ | async">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.registrationDate | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
