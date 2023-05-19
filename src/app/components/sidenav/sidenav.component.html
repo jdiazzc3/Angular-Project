@@ -1,7 +1,7 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
     <div class="logo-container">
-      <!-- <img class="logo" [src]="userPhotoURL" alt="User Photo" (click)="toggleCollapse()"> -->
-      <div class="logo" (click)="toggleCollapse()">H</div>
+      <img class="logo" [src]="userPhotoURL" alt="User Photo" (click)="toggleCollapse()">
+      <!-- <div class="logo" (click)="toggleCollapse()">H</div> -->
       <div class="logo-text" *ngIf="collapsed">
         {{ userName }}
       </div>
