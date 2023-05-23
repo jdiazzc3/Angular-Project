@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
       this.firestore.collection('users').add({
         name: name,
         email: email,
-        photo: photo,
+        photoURL: photo,
         // uid: user.user?.uid
       }).then(() => {
         this.toastr.success('User registered successfully!', 'Succes');

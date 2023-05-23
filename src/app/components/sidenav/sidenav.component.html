@@ -1,7 +1,6 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
     <div class="logo-container">
-      <img class="logo" [src]="userPhotoURL" alt="User Photo" (click)="toggleCollapse()">
-      <!-- <div class="logo" (click)="toggleCollapse()">H</div> -->
+      <img class="logo" [src]="userPhotoURL" alt="Profile Photo" (click)="toggleCollapse()">
       <div class="logo-text" *ngIf="collapsed">
         {{ userName }}
       </div>
@@ -18,5 +17,9 @@
         </a>
       </li>
     </ul>
-  </div>
-  
+    <div class="sidenav-footer">
+      <button class="btn" (click)="logout()" >
+        <i class="fa-solid fa-sign-out"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">Logout</span>
+      </button>
+</div>  

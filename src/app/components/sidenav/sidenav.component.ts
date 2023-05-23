@@ -1,6 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { navbarData } from './nav-data';
 import { EventEmitter, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 interface SideNavToggle {
   collapsed: boolean;
@@ -20,6 +23,12 @@ export class SidenavComponent implements OnInit {
   userName: string = '';
   userPhotoURL: string | undefined;
 
+  constructor(
+    private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) {}
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
@@ -32,7 +41,12 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    this.getUserName();
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      this.userPhotoURL = user.photoURL;
+      this.userName = this.getFirstTwoNames(user.displayName);
+    }
   }
 
   toggleCollapse(): void {
@@ -45,15 +59,20 @@ export class SidenavComponent implements OnInit {
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 
-  getUserName() {
-    const userInfoString = localStorage.getItem('userInfo');
-    if (userInfoString) {
-      const userInfo = JSON.parse(userInfoString);
-      this.userName = userInfo.name.split(' ')[0];
-      this.userPhotoURL = userInfo.photoURL;
+  getFirstTwoNames(fullName: string): string {
+    const names = fullName.split(' ');
+    if (names.length >= 2) {
+      return names[0] + ' ' + names[1];
     } else {
-      // Obtener el nombre y la foto del usuario desde Firestore y asignarlos a this.userName y this.userPhotoURL
-      // ...
+      return fullName;
     }
   }
+  
+  logout() {
+    this.afAuth.signOut();
+    localStorage.removeItem('userInfo');
+    localStorage.setItem('isLoggedIn', 'false');
+    this.router.navigateByUrl('/login');
+  }
+
 }

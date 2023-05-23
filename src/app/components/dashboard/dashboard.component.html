@@ -1,21 +1,26 @@
 <div class="container">
   <div class="input-container">
-    <input type="text" id="search" placeholder="Buscar">
+    <input type="text" id="search" placeholder="Search">
     <i class="fa-solid fa-magnifying-glass"></i>
   </div>
   <table>
     <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Fecha de Registro</th>
+        <th>Name</th>
+        <th>Email</th>
+        <!-- <th>Register Date</th> -->
+        <th class="action">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users$ | async">
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.registrationDate | date:'medium' }}</td>
+        <!-- <td>{{ user.registrationDate | date:'medium' }}</td> -->
+        <td class="action">
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
+        </td>
       </tr>
     </tbody>
   </table>

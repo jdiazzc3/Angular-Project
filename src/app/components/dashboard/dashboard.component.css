@@ -18,6 +18,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  color: #3d3c3c;
+  /* font-weight: 500; */
 }
 
 .input-container i {
@@ -39,8 +41,10 @@
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 thead th {
@@ -48,11 +52,25 @@ thead th {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 
 tbody td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+tbody .action, thead .action {
+  border-right: none;
+}
+
+.fa-solid  {
+  cursor: pointer;
+}
+
+.fa-pen {
+  margin-right: 1.2rem;
 }
 
 tbody tr:last-child td {

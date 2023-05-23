@@ -9,9 +9,4 @@ export const navbarData = [
         icon: 'fa-solid fa-plate-wheat',
         label: 'Recipes'
     },
-    {
-        routeLink: 'login',
-        icon: 'fa-solid fa-sign-out',
-        label: 'Log Out'
-    }
 ];

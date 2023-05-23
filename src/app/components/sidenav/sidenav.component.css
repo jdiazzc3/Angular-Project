@@ -21,21 +21,21 @@
 }
 
 .sidenav .logo-container .logo {
-    background: #fff;
+    /* background: #fff; */
     text-align: center;
     width: 3rem;
     min-width: 3rem;
     border-radius: 0.625rem;
-    padding: 0.313rem;
-    font-size: 24px;
-    font-weight: 900;
+    /* padding: 0.313rem; */
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
     border: none;
 }
 
 .sidenav .logo-container .logo-text {
     margin-left: 1.5rem;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #fff;
 }
@@ -66,7 +66,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100% - 3.65rem);
+    /* height: calc(100% - 3.65rem); */
     cursor: pointer;
 }
 
@@ -109,3 +109,43 @@
 .active .sidenav-link-icon, .active .sidenav-link-text {
     color: #263238;
 }
+
+.sidenav-footer {
+    position: absolute; 
+    bottom: 0; 
+    margin: 0 0 0.5rem 0;
+    background-color: #263238;
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;   
+}
+
+.sidenav-footer .btn {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    width: 100%;
+    color: #f3f3f3;
+    text-decoration: none;
+    border-radius: 0.625rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .sidenav-footer .btn i {
+    font-size: 22px;
+    width: 2rem;
+    min-width: 2rem;
+    margin-left: -0.15rem;
+    text-align: center;
+  }
+
+  .sidenav-footer .btn .sidenav-link-text {
+    margin-left: 2rem;
+  }
+  
+  .sidenav-footer .btn:hover {
+    color: #263238;
+    background-color: #fff;
+  }
