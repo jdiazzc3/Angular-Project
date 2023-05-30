@@ -71,10 +71,13 @@ export class SidenavComponent implements OnInit {
   
   
   logout() {
-    this.afAuth.signOut();
-    localStorage.removeItem('userInfo');
-    localStorage.setItem('isLoggedIn', 'false');
-    this.router.navigateByUrl('/login');
-  }
-
+    this.afAuth.signOut().then(() => {
+      localStorage.removeItem('userInfo');
+      localStorage.setItem('isLoggedIn', 'false');
+      this.router.navigateByUrl('/login');
+    }).catch((error) => {
+      console.error('Error signing out:', error);
+      // Maneja el error de cierre de sesión según sea necesario
+    });
+  }  
 }

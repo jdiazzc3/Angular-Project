@@ -5,13 +5,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements AfterViewInit {
+
+  user: any;
 
   constructor(
     private router: Router,
@@ -39,7 +40,7 @@ export class DashboardComponent implements AfterViewInit {
     const uid = user.uid;
   
     if (uid) {
-      // Obtener el usuario actualmente autenticado
+      // Obtiene el usuario actualmente autenticado
       this.afAuth.authState.subscribe(currentUser => {
         if (currentUser && currentUser.uid === uid) {
           this.toastr.error("You can't delete your own account", 'Error');
@@ -49,10 +50,10 @@ export class DashboardComponent implements AfterViewInit {
               querySnapshot.forEach(doc => {
                 doc.ref.delete()
                   .then(() => {
-                    console.log('Usuario eliminado correctamente');
+                    this.toastr.success('User deleted successfully', 'Success');
                   })
                   .catch((error) => {
-                    console.error('Error al eliminar el usuario:', error);
++                    this.toastr.error('An error occurred while deleting the user', 'Error');
                   });
               });
             });
@@ -62,5 +63,57 @@ export class DashboardComponent implements AfterViewInit {
       console.error('El usuario no tiene un UID válido');
     }
   }
+
+  openModal(user: any) {
+    this.user = user;
+    const modal = document.getElementById('modal') as HTMLElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const photoURLInput = document.getElementById('photoURL') as HTMLInputElement;
   
+    // Asignar los datos del usuario a los inputs correspondientes
+    nameInput.value = user.name || '';
+    photoURLInput.value = user.photoURL || '';
+  
+    // Mostrar el modal
+    modal.style.display = 'block';
+  }
+
+  close() {
+    const modal = document.getElementById('modal') as HTMLElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const photoURLInput = document.getElementById('photoURL') as HTMLInputElement;
+  
+    // Restablecer los valores de los inputs del modal
+    nameInput.value = '';
+    photoURLInput.value = '';
+  
+    // Ocultar el modal
+    modal.style.display = 'none';
+  }
+  
+  edit() {
+    if (this.user) {
+      const newName = document.getElementById('name') as HTMLInputElement;
+      const newPhotoURL = document.getElementById('photoURL') as HTMLInputElement;
+  
+      if (newName && newPhotoURL) {
+        const updatedUser = { ...this.user }; // Crear una copia del usuario para evitar modificar directamente la referencia original
+        updatedUser.name = newName.value;
+        updatedUser.photoURL = newPhotoURL.value;
+  
+        // Realizar la actualización del usuario en Firestore
+        this.firestore.collection('users').doc(this.user.uid).update(updatedUser)
+          .then(() => {
+            // Éxito en la actualización
+            this.toastr.success('User updated successfully', 'Success');
+            this.close();
+          })
+          .catch((error) => {
+            // Error en la actualización
+            console.error('Error updating user:', error);
+            this.toastr.error('An error occurred while updating the user', 'Error');
+          });
+      }
+    }
+  }
 }

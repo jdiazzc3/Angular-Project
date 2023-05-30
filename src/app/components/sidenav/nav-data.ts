@@ -13,5 +13,5 @@ export const navbarData = [
     //     routeLink: 'edit-profile',
     //     icon: 'fa-solid fa-user',
     //     label: 'Edit Profile'
-    // }
+    // },
 ];
