@@ -9,4 +9,9 @@ export const navbarData = [
         icon: 'fa-solid fa-plate-wheat',
         label: 'Recipes'
     },
+    // {
+    //     routeLink: 'edit-profile',
+    //     icon: 'fa-solid fa-user',
+    //     label: 'Edit Profile'
+    // }
 ];

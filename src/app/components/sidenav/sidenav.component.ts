@@ -42,11 +42,12 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     const userInfo = localStorage.getItem('userInfo');
+    console.log('userInfo:', userInfo);
     if (userInfo) {
       const user = JSON.parse(userInfo);
       this.userPhotoURL = user.photoURL;
-      this.userName = this.getFirstTwoNames(user.displayName);
-    }
+      this.userName = this.getFirstTwoNames(user.displayName || user.name);
+    }    
   }
 
   toggleCollapse(): void {
@@ -67,6 +68,7 @@ export class SidenavComponent implements OnInit {
       return fullName;
     }
   }
+  
   
   logout() {
     this.afAuth.signOut();

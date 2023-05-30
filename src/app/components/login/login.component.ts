@@ -45,16 +45,33 @@ export class LoginComponent implements OnInit {
   login() {
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
-
+  
     this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.handleLoginSuccess(user);
+      .then((userCredential) => {
+        const currentUser = userCredential.user;
+  
+        // Buscar el usuario actual en Firestore
+        this.firestore.collection('users', ref => ref.where('uid', '==', currentUser?.uid)).get()
+          .subscribe(querySnapshot => {
+            if (querySnapshot.size > 0) {
+              const userData = querySnapshot.docs[0].data();
+              console.log('Usuario encontrado:', userData);
+  
+              // Guardar la información del usuario en el local storage
+              localStorage.setItem('userInfo', JSON.stringify(userData));
+              this.handleLoginSuccess(currentUser);
+            } else {
+              // Si no se encontró el usuario en Firestore, mostrar un error
+              this.toastr.error('User not found in database.', 'Error');
+            }
+          });
       })
       .catch(() => {
         this.toastr.error('Invalid email or password. Please try again.', 'Error');
       });
   }
-
+  
+      
   loginGoogle() {
     this.afAuth.signInWithPopup(this.googleProvider)
       .then((result) => {
@@ -95,12 +112,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  logout() {
-    this.afAuth.signOut();
-    localStorage.setItem('loggedIn', 'false');
-    this.router.navigate(['/login']);
-  }
-
   private handleExternalLogin(result: any) {
     this.user = result.user;
     this.loginUsuario.reset();
@@ -118,7 +129,8 @@ export class LoginComponent implements OnInit {
           const userData: UserData = {
             name: this.user.displayName || '',
             email: this.user.email || '',
-            photoURL: this.user.photoURL || ''
+            photoURL: this.user.photoURL || '',
+            uid: this.user.uid || '',
           };
           this.firestore.collection('users').doc(this.user.uid).set(userData)
             .then(() => {
@@ -137,13 +149,21 @@ export class LoginComponent implements OnInit {
     this.toastr.success('User logged in successfully!', 'Success');
     this.loginUsuario.reset();
     localStorage.setItem('loggedIn', 'true');
-    // Guardar la información del usuario en el localStorage solo si se inicia sesión con un proveedor
-    if (user && user.providerData && user.providerData.length > 0) {
-      this.user = user;
-      this.saveUserInfo();
+    
+    // Guardar la información del usuario en el localStorage solo si se inicia sesión con correo y contraseña
+    if (user && user.providerData && user.providerData.length === 0) {
+      const userData: UserData = {
+        name: user.displayName || '',
+        email: user.email || '',
+        photoURL: user.photoURL || '',
+        uid: user.uid || '',
+      };
+      localStorage.setItem('userInfo', JSON.stringify(userData));
     }
+    
     this.router.navigate(['/home']);
   }
+  
 
   private saveUserInfo() {
     localStorage.setItem('userInfo', JSON.stringify(this.user));

@@ -10,6 +10,7 @@ import { AuthGuard } from './auth.guard';
 import { MainComponent } from './main/main.component';
 import { BodyComponent } from './body/body.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'login', pathMatch:'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
     { path:"sidenav", component:SidenavComponent },
     { path:"body", component:BodyComponent},
     { path:"recipes", component:RecipesComponent},
-    { path:"**", redirectTo:'dashboard', pathMatch:'full' }
+    { path:"edit-profile", component:EditProfileComponent}
+    ,{ path:"**", redirectTo:'dashboard', pathMatch:'full' }
   ]}
   ,{ path:"*/", redirectTo:'login', pathMatch:"full" }
 ];

@@ -21,10 +21,12 @@
 }
 
 .sidenav .logo-container .logo {
-    /* background: #fff; */
+    background: #fff;
     text-align: center;
     width: 3rem;
     min-width: 3rem;
+    height: 3rem;
+    min-height: 3rem;
     border-radius: 0.625rem;
     /* padding: 0.313rem; */
     font-size: 0.8rem;

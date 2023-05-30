@@ -1,25 +1,26 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
-    <div class="logo-container">
-      <img class="logo" [src]="userPhotoURL" alt="Profile Photo" (click)="toggleCollapse()">
-      <div class="logo-text" *ngIf="collapsed">
-        {{ userName }}
-      </div>
-      <button class="btn" *ngIf="collapsed" (click)="closeSidenav()">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+  <div class="logo-container">
+    <img class="logo" [src]="userPhotoURL || 'https://img.freepik.com/iconos-gratis/usuario_318-552176.jpg'" alt="Profile Photo" (click)="toggleCollapse()">
+    <div class="logo-text" *ngIf="collapsed">
+      {{ userName }}
     </div>
-    <ul class="sidenav-nav">
-      <li class="sidenav-nav-item" *ngFor="let data of navData">
-        <a class="sidenav-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
-          <i class="sidenav-link-icon" [class]="data.icon"></i>
-          <span class="sidenav-link-text" *ngIf="collapsed">{{ data.label }}</span>
-        </a>
-      </li>
-    </ul>
-    <div class="sidenav-footer">
-      <button class="btn" (click)="logout()" >
-        <i class="fa-solid fa-sign-out"></i>
-        <span class="sidenav-link-text" *ngIf="collapsed">Logout</span>
-      </button>
-</div>  
+    <button class="btn" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <i class="sidenav-link-icon" [class]="data.icon"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">{{ data.label }}</span>
+      </a>
+    </li>
+  </ul>
+  <div class="sidenav-footer">
+    <button class="btn" (click)="logout()">
+      <i class="fa-solid fa-sign-out"></i>
+      <span class="sidenav-link-text" *ngIf="collapsed">Logout</span>
+    </button>
+  </div>
+</div>

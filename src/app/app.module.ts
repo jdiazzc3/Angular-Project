@@ -26,6 +26,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { AuthGuard } from './auth.guard';
 import { MainComponent } from './main/main.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { MainComponent } from './main/main.component';
     SidenavComponent,
     RecipesComponent,
     MainComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

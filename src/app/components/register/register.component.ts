@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from 'firebase/app';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
- import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
         name: name,
         email: email,
         photoURL: photo,
-        // uid: user.user?.uid
+        uid: user.user?.uid
       }).then(() => {
         this.toastr.success('User registered successfully!', 'Succes');
         this.registrarUsuario.reset();

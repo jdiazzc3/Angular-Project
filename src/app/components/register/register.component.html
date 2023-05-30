@@ -29,20 +29,13 @@
                     <input type="password" required formControlName="confirmPassword">
                     <label>Confirm Password</label>
                 </div>
-                
-                <div class="remember-forgot">
-                    <label for="upload-photo" class="btn-upload">
-                        <span class="icon"><img src="../../../assets/img/upload.svg"></span>
-                        <span id="file-name">Profile Photo</span>
-                      </label>
-                      <input type="file" id="upload-photo" style="display: none;" formControlName="photo" accept="image/*" (change)="onFileSelected($event)">
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-link"></i></span>
+                    <input type="text" required formControlName="photo">
+                    <label>Photo Link</label>
                 </div>
                 <button type="submit" class="btn">Sign Up</button>
             </form>
-        </div>
-    
-    
-        
-        
+        </div>        
     </div>
 </body>
