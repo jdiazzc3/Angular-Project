@@ -81,22 +81,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      let fileName = file.name;
-      const maxLength = 9; // Longitud máxima permitida para el nombre del archivo
-      if (fileName.length > maxLength) {
-        // Si el nombre es demasiado largo, truncarlo y agregar puntos suspensivos
-        fileName = fileName.substr(0, maxLength) + '...';
-      }
-      const fileNameElement = document.getElementById('file-name');
-      if (fileNameElement) {
-        fileNameElement.innerHTML = fileName;
-      }
-    }
-  }
-
   firebaseError(code: string) {
 
     switch (code) {

@@ -74,7 +74,6 @@ export class DashboardComponent implements AfterViewInit {
     nameInput.value = user.name || '';
     photoURLInput.value = user.photoURL || '';
   
-    // Mostrar el modal
     modal.style.display = 'block';
   }
 
@@ -87,7 +86,6 @@ export class DashboardComponent implements AfterViewInit {
     nameInput.value = '';
     photoURLInput.value = '';
   
-    // Ocultar el modal
     modal.style.display = 'none';
   }
   
@@ -97,23 +95,22 @@ export class DashboardComponent implements AfterViewInit {
       const newPhotoURL = document.getElementById('photoURL') as HTMLInputElement;
   
       if (newName && newPhotoURL) {
-        const updatedUser = { ...this.user }; // Crear una copia del usuario para evitar modificar directamente la referencia original
-        updatedUser.name = newName.value;
-        updatedUser.photoURL = newPhotoURL.value;
+        const updatedUser = { // Crear un objeto con los campos a actualizar
+          name: newName.value,
+          photoURL: newPhotoURL.value
+        };
   
         // Realizar la actualización del usuario en Firestore
         this.firestore.collection('users').doc(this.user.uid).update(updatedUser)
           .then(() => {
-            // Éxito en la actualización
             this.toastr.success('User updated successfully', 'Success');
             this.close();
           })
           .catch((error) => {
-            // Error en la actualización
-            console.error('Error updating user:', error);
             this.toastr.error('An error occurred while updating the user', 'Error');
           });
       }
     }
   }
+  
 }

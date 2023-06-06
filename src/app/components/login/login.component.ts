@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   private facebookProvider = new FacebookAuthProvider();
   private githubProvider = new GithubAuthProvider();
   private twitterProvider = new TwitterAuthProvider();
-  private user: any; // Variable para almacenar los datos del usuario
+  private user: any;
 
   constructor(
     private fb: FormBuilder,
